@@ -1,0 +1,15 @@
+{
+  "name": "shared-trip",
+  "version": "1.0.0",
+  "description": "shared trip workshop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "shared",
+    "trip"
+  ],
+  "author": "Mihail Valkov",
+  "license": "ISC"
+}
