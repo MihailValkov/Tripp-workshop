@@ -4,6 +4,7 @@ const db = require('./config/dataBase');
 const env = process.env.NODE_ENV;
 const config = require("./config/config")[env];
 const app = require('express')();
+const path = require('path')
 
 
 db().then(()=> {
@@ -11,7 +12,12 @@ db().then(()=> {
     require('./config/routes')(app);
     app.use(function(err,req,res,next){
         {
-            console.log(err);
+            if(err.name==="CastError") {
+                res.render(path.resolve('./views/error/404.hbs'),req.user|| '')
+            }
+            if (err.status === 500) {
+                res.render(path.resolve('./views/error/500.hbs'),req.user|| '')
+            }
             
         }
     })

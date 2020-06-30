@@ -1,14 +1,18 @@
 const userModel = require('../models/user');
 const jwt = require('../utils/jwt');
-const cookieParser= require('cookie-parser');
 module.exports= {
     get:{
         register (req,res,next){
-            res.render('user/register.hbs');
+            res.render('user/register.hbs', {title :"Register Page"});
         },
         login (req,res,next){
-            res.render('user/login.hbs');
+            res.render('user/login.hbs',{title :"Login Page"});
         },
+        logout(req,res,next){
+            res.clearCookie(process.env.AUTH_COOKIE_NAME);
+            res.user= null;
+            res.redirect('/home');
+        }
     },
     post:{
         async register(req,res,next){
@@ -35,14 +39,12 @@ module.exports= {
             const {email, password}= req.body;
             try {
                 const user = await userModel.findOne({email});
-                if(!user) {res.render('/user/login.hbs',{message : 'There is no such username or email!'}); return;}
+                if(!user) {res.render('user/login.hbs',{message : 'There is no such username or email!'}); return;}
                 const match= await user.matchPasswords(password);
-                if (!match) {res.render('/user/login.hbs',{message : 'Email or Password is not valid!'}); return;}
+                if (!match) {res.render('user/login.hbs',{message : 'Email or Password is not valid!'}); return;}
                 const token = jwt.createToken(user);
                 req.user=user;
-                res.cookie(process.env.AUTH_COOKIE_NAME, token).redirect('/home/')
-                
-                
+                res.cookie(process.env.AUTH_COOKIE_NAME, token).redirect('/home/');
             } catch (error) {
                 next(error)
             }

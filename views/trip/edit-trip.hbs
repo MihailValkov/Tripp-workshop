@@ -1,0 +1,99 @@
+<section class="py-5">
+    <div class="container">
+        <h1 style="margin: 2%; text-align: center;">Edit trip</h1>
+        <div style="padding: 5%;">
+            <form method="POST" action="{{_id}}" style="text-align:center">
+                <div style="display: flex;justify-content: space-around;">
+                    <label for="startPoint"> <i class="fas fa-map-marker-alt"></i> Starting Point </label>
+                    <label for="endPoint"> <i class="fas fa-map-marker-alt"></i> End Point</label>
+
+                </div>
+
+                <div class="form-group" style="display: flex;justify-content: space-between;">
+
+                    <input type="text" class="form-control-2" id="startPoint" aria-describedby="emailHelp"
+                        placeholder="Studentski grad" , name="startPoint" value="{{startPoint}}">
+
+                    <input type="text" class="form-control-2" id="endPoint" aria-describedby="emailHelp"
+                        placeholder="Pamporovo" , name="endPoint" value="{{endPoint}}">
+                </div>
+
+                <div style="display: flex;justify-content: space-around;">
+                    <label for="date"> <i class="far fa-calendar-alt"></i> Date</label>
+                    <label for="time"> <i class="far fa-clock"></i> Time</label>
+
+                </div>
+
+                <div class="form-group" style="display: flex;justify-content: space-between;">
+                    <input type="date" class="form-control-2" id="date" placeholder="29 December 2019" name="date" value="{{date}}">
+                    <input type="time" class="form-control-2" id="time" placeholder="19:00 PM" name="time" value="{{time}}">
+                </div>
+
+                <div style="display: flex;justify-content: space-around;">
+                    <label for="carImage">Car Image</label>
+                    <label for="carModel">Car Model</label>
+                </div>
+                <div class="form-group" style="display: flex;justify-content: space-between;">
+
+                    <input type="text" class="form-control-2" id="carImage" placeholder="https://..." name="carImage" value="{{carImage}}">
+                    <input type="text" class="form-control-2" id="carModel" placeholder="Audi A5" name="carModel" value="{{carModel}}">
+                </div>
+
+                <div style="display: flex;justify-content: space-around;">
+                    <label for="seats">Available Seats</label>
+                    <label for="price">Price</label>
+                </div>
+                <div class="form-group" style="display: flex;justify-content: space-between;">
+                    <input min="1" max="4" type="number" class="form-control-2" id="seats" placeholder="4" name="seats" value="{{seats}}">
+                    <input type="text" class="form-control-2" id="price" placeholder="25 BGN" name="price" value="{{price}}">
+                </div>
+                <br>
+                <div style="display: flex;justify-content: space-around;">
+                    <label for="smoking"><i class="fas fa-smoking"></i></label>
+                    <label for="eating"><i class="fas fa-utensils"></i></label>
+                    <label for="drinking"><i class="fas fa-beer"></i></label>
+                    <label for="climatic"><i class="fas fa-fan"></i></label>
+                </div>
+                <div class="form-group" style="display: flex;justify-content: space-between;">
+                    {{#if smoking}}
+                    <input type="checkbox" checked class="form-control-2" id="smoking" name="smoking">
+                    {{else}}
+                    <input type="checkbox" class="form-control-2" id="smoking" name="smoking">
+                    {{/if}}
+
+                    {{#if eating}}
+                   <input type="checkbox" checked class="form-control-2" id="eating" name="eating">
+                    {{else}}
+                    <input type="checkbox" class="form-control-2" id="eating" name="eating">
+                    {{/if}}
+
+                    {{#if drinking}}
+                   <input type="checkbox" checked class="form-control-2" id="drinking" name="drinking">
+                    {{else}}
+                    <input type="checkbox" class="form-control-2" id="drinking" name="drinking">
+                    {{/if}}
+
+                     {{#if climatic}}
+                    <input type="checkbox" checked class="form-control-2" id="climatic" name="climatic">
+                    {{else}}
+                     <input type="checkbox" class="form-control-2" id="climatic" name="climatic">
+                    {{/if}}
+                    
+                </div>
+                <div class="form-group" style="display: flex;justify-content: space-around;">
+                    <span>Smoking</span>
+                    <span>Eating</span>
+                    <span>Drinking</span>
+                    <span>Climatic</span>
+                </div>
+                <br>
+                <br>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea style="resize: none;" class="form-control" name="description" id="description" cols="5" rows="5" >{{description}}</textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Edit</button>
+            </form>
+        </div>
+    </div>
+</section>
