@@ -12,10 +12,10 @@
                 <div class="form-group" style="display: flex;justify-content: space-between;">
 
                     <input type="text" class="form-control-2" id="startPoint" aria-describedby="emailHelp"
-                        placeholder="Studentski grad" , name="startPoint">
+                        placeholder="Studentski grad" , name="startPoint" value="{{startPoint}}">
 
                     <input type="text" class="form-control-2" id="endPoint" aria-describedby="emailHelp"
-                        placeholder="Pamporovo" , name="endPoint">
+                        placeholder="Pamporovo" , name="endPoint" value="{{endPoint}}">
                 </div>
 
                 <div style="display: flex;justify-content: space-around;">
@@ -25,8 +25,8 @@
                 </div>
 
                 <div class="form-group" style="display: flex;justify-content: space-between;">
-                    <input type="date" class="form-control-2" id="date" placeholder="29 December 2019" name="date">
-                    <input type="time" class="form-control-2" id="time" placeholder="19:00 PM" name="time">
+                    <input type="date" class="form-control-2" id="date" placeholder="29 December 2019" name="date" value="{{date}}">
+                    <input type="time" class="form-control-2" id="time" placeholder="19:00 PM" name="time" value="{{time}}">
                 </div>
 
                 <div style="display: flex;justify-content: space-around;">
@@ -35,8 +35,8 @@
                 </div>
                 <div class="form-group" style="display: flex;justify-content: space-between;">
 
-                    <input type="text" class="form-control-2" id="carImage" placeholder="https://..." name="carImage">
-                    <input type="text" class="form-control-2" id="carModel" placeholder="Audi A5" name="carModel">
+                    <input type="text" class="form-control-2" id="carImage" placeholder="https://..." name="carImage" value="{{carImage}}">
+                    <input type="text" class="form-control-2" id="carModel" placeholder="Audi A5" name="carModel" value="{{carModel}}">
                 </div>
 
                 <div style="display: flex;justify-content: space-around;">
@@ -44,8 +44,8 @@
                     <label for="price">Price</label>
                 </div>
                 <div class="form-group" style="display: flex;justify-content: space-between;">
-                    <input min="1" max="4" type="number" class="form-control-2" id="seats" placeholder="4" name="seats">
-                    <input type="text" class="form-control-2" id="price" placeholder="25 BGN" name="price">
+                    <input min="1" max="4" type="number" class="form-control-2" id="seats" placeholder="4" name="seats" value="{{seats}}">
+                    <input type="text" class="form-control-2" id="price" placeholder="25 BGN" name="price"  value="{{price}}">
                 </div>
                 <br>
                 <div style="display: flex;justify-content: space-around;">
@@ -54,12 +54,31 @@
                     <label for="drinking"><i class="fas fa-beer"></i></label>
                     <label for="climatic"><i class="fas fa-fan"></i></label>
                 </div>
-                <div class="form-group" style="display: flex;justify-content: space-between;">
+                 <div class="form-group" style="display: flex;justify-content: space-between;">
+                    {{#if smoking}}
+                    <input type="checkbox" checked class="form-control-2" id="smoking" name="smoking">
+                    {{else}}
                     <input type="checkbox" class="form-control-2" id="smoking" name="smoking">
-                    <input type="checkbox" class="form-control-2" id="eating" name="eating">
-                    <input type="checkbox" class="form-control-2" id="drinking" name="drinking">
-                    <input type="checkbox" class="form-control-2" id="climatic" name="climatic">
+                    {{/if}}
 
+                    {{#if eating}}
+                   <input type="checkbox" checked class="form-control-2" id="eating" name="eating">
+                    {{else}}
+                    <input type="checkbox" class="form-control-2" id="eating" name="eating">
+                    {{/if}}
+
+                    {{#if drinking}}
+                   <input type="checkbox" checked class="form-control-2" id="drinking" name="drinking">
+                    {{else}}
+                    <input type="checkbox" class="form-control-2" id="drinking" name="drinking">
+                    {{/if}}
+
+                     {{#if climatic}}
+                    <input type="checkbox" checked class="form-control-2" id="climatic" name="climatic">
+                    {{else}}
+                     <input type="checkbox" class="form-control-2" id="climatic" name="climatic">
+                    {{/if}}
+                    
                 </div>
                 <div class="form-group" style="display: flex;justify-content: space-around;">
                     <span>Smoking</span>
@@ -71,7 +90,7 @@
                 <br>
                 <div class="form-group">
                     <label for="description">Description</label>
-                     <textarea style="resize: none;" class="form-control" name="description" id="description" cols="5" rows="5" placeholder="Information about the trip"></textarea>
+                     <textarea style="resize: none;" class="form-control" name="description" id="description" cols="5" rows="5" placeholder="Information about the trip">{{description}}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
