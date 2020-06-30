@@ -17,7 +17,7 @@ module.exports= {
     post:{
         async register(req,res,next){
            const { email,password,rePassword} = req.body;
-           if (password !== rePassword){res.render('user/register.hbs', {message : 'Passwords is don\'t match'}); return}
+           if (password !== rePassword){res.render('user/register.hbs', {email,password,rePassword,message : 'Passwords is don\'t match'}); return}
            try {
             const user = await userModel.findOne({ email});
             if(user){ res.render('user/register.hbs', {message : "Email address is already taken!"}); return; }
