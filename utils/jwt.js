@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 module.exports = {
 
     createToken: function(user){
-        return jwt.sign({email : user.email ,id:user._id},process.env.SECRET)
+        return jwt.sign({email : user.email ,id:user._id,userImage :user.userImage},process.env.SECRET)
     },
     verifyToken: function(token){
         return new Promise((resolve,reject)=>{

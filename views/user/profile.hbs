@@ -1,0 +1,12 @@
+<div class="profile col-md-6 text-center col-lg" style="margin-top:95px;margin-bottom:50px">
+    <img class="profile-img" style="border-radius:50%; height:250px" src="{{userImage}}" />
+    <div class="profile-info">
+        <br>
+        <p>Email: <small>{{email}}</small></p>
+        <p>Trip History : {{count}} counts</p>
+        {{#each tripsHistory}}
+        <p>from {{startPoint}} to {{endPoint }} <br>on {{date}} at {{time}}</p>
+        {{/each}}
+
+    </div>
+</div>

@@ -19,6 +19,16 @@ const userSchema = new mongoose.Schema({
         minlength:[6,"Password should be at least 6 characters long!"]
 
     },
+    userImage : {
+        type:String,
+        required: true,
+        validate: {
+            validator: (x)=> {
+                return /http:\/\/.+|https:\/\/.+/.test(x);
+            },
+            message :()=> 'User image is not a valid URL !'
+        }
+    },
     tripsHistory:[{type : mongoose.Schema.Types.ObjectId , ref:'Trip'}]
     
 })
