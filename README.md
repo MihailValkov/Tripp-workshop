@@ -10,3 +10,4 @@ NODE_ENV=development
 AUTH_COOKIE_NAME=auth-cookie
 4.npm start
 5.enjoy the trip
+
