@@ -1,5 +1,8 @@
 const tripModel = require("../models/trip");
 const userModel = require("../models/user");
+function convertEmailToUsername (email){
+  return email.split("@")[0].replace('-'," ").replace('_'," ").split(' ').map(x=> x=x[0].toUpperCase()+x.slice(1)).join(' ');
+}
 module.exports = {
   get: {
     sharedtrips(req, res, next) {
@@ -28,19 +31,27 @@ module.exports = {
     details (req,res,next){
         const {id}= req.params;
         tripModel.findById(id).populate('buddies').lean().then((trip)=> {
+          userModel.findOne({email:trip.creator}).then((c)=>{
+            return c.userImage;
+          }).then((creatorImage)=> {
             const isCreator =trip.creator=== req.user.email;
             const isAvailableSeats=trip.seats - trip.buddies.length;
             const isJoined = !!trip.buddies.find(x=> x.email === req.user.email)
+            const username = convertEmailToUsername(trip.creator);
+            const buddies = trip.buddies.map((x,i)=> {return {name : `${i+1}.${convertEmailToUsername(x.email)}`, image :x.userImage}})
             res.render('../views/trip/details.hbs',{
                ...req.user|| '',
-               username:req.user.email.split("@")[0].replace('-'," ").replace('_'," "),
+               username,
                 ...trip,
-                buddies : trip.buddies.map((x,i)=> x = `${i+1}.${x.email}`),
+                buddies  ,
                 isCreator,
                 isAvailableSeats,
                 isJoined ,
+                creatorImage,
                 title :"Details Page" 
             });
+          }).catch(next)
+            
         }).catch(next)
     },
     closetrip(req,res,next){
@@ -65,6 +76,7 @@ module.exports = {
         res.render('../views/trip/edit-trip.hbs',{
           ...req.user|| '',
           ...trip,
+          seats : trip.seats-trip.buddies.length,
           title :"Edit Trip Page"
         })
       }).catch(next)
